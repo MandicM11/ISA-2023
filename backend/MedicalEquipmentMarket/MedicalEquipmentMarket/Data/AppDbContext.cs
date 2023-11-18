@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MedicalEquipmentMarket.Data.DataSeed;
+using MedicalEquipmentMarket.Model;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 namespace MedicalEquipmentMarket.Data
 {
@@ -15,5 +17,14 @@ namespace MedicalEquipmentMarket.Data
         {
             optionsBuilder.UseNpgsql(Configuration.GetConnectionString("WebApiDatabase"));
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+
+            modelBuilder.SeedEquipment();
+
+            base.OnModelCreating(modelBuilder);
+
+        }
+        public DbSet<Equipment> Equipment { get; set; }
     }
 }
