@@ -21,10 +21,13 @@ namespace MedicalEquipmentMarket.Data
         {
 
             modelBuilder.SeedEquipment();
-
+            modelBuilder.SeedCompany();
+            modelBuilder.SeedReservation();
             base.OnModelCreating(modelBuilder);
 
         }
         public DbSet<Equipment> Equipment { get; set; }
+        public DbSet<Company> Company{ get; set; }
+        public DbSet<Reservation> Reservation { get; set; }
     }
 }
