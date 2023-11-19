@@ -6,7 +6,6 @@ namespace MedicalEquipmentMarket.Model
         public int CompanId { get; set; }
         public int EquipId { get; set; }
         public DateTime ReportDate { get; set; }
-        public string Status { get; set; }
 
 
         public SalesReport()
@@ -18,7 +17,6 @@ namespace MedicalEquipmentMarket.Model
             IdSales = id;
             CompanId = companyId;
             ReportDate = reservationTime;
-            
 
         }
     }
