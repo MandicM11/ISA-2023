@@ -19,15 +19,19 @@ namespace MedicalEquipmentMarket.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<PickupSchedule>().HasKey(p => p.IdS);
+            modelBuilder.Entity<SalesReport>().HasKey(s => s.IdSales);
             modelBuilder.SeedEquipment();
             modelBuilder.SeedCompany();
+            modelBuilder.SeedSalesReport();
             modelBuilder.SeedReservation();
+            modelBuilder.SeedPickupSchedule();
             base.OnModelCreating(modelBuilder);
 
         }
         public DbSet<Equipment> Equipment { get; set; }
         public DbSet<Company> Company{ get; set; }
         public DbSet<Reservation> Reservation { get; set; }
+        public DbSet<PickupSchedule> PickupSchedule { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 {
     public class Equipment
     {
-        public int Id { get; set; }
+        public int EquipmentId { get; set; }
 
         public string Name { get; set; }
 
@@ -13,12 +13,12 @@
         public Equipment() { 
         
         }
-        public  Equipment(int Id,string Name, string Description, double Price)
+        public  Equipment(int id,string name, string description, double price)
         {
-            this.Id= Id;
-            this.Name= Name;
-            this.Description= Description;
-            this.Price= Price;
+            this.EquipmentId= id;
+            this.Name= name;
+            this.Description= description;
+            this.Price= price;
         }
     }
 }
