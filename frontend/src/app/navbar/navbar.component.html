@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav style="margin-left:10px;" class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -26,4 +26,13 @@
         </li>
       </ul>
     </div>
-  </nav>
+    <div class="bottom-menu-items">
+      <a style="margin-right: 20px;" mat-list-item class="libre">
+        <button type="button" class="btn btn-secondary"><a class="nav-link" href="login">Login</a></button>
+      </a>
+      <a style="margin-right: 20px;"  mat-list-item class="libre">
+        <button type="button" class="btn btn-secondary"><a class="nav-link" href="register">Register</a></button>
+      </a>
+    </div>
+</nav>
+<router-outlet></router-outlet>
