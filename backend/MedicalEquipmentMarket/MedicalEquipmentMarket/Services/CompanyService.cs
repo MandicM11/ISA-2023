@@ -5,7 +5,7 @@ using MedicalEquipmentMarket.Data;
 
 namespace MedicalEquipmentMarket.Services
 {
-    public class CompanyService
+    public class CompanyService : ICompanyService
     {
         private readonly AppDbContext _context;
 
@@ -16,7 +16,7 @@ namespace MedicalEquipmentMarket.Services
 
         public List<Company> GetAllCompanies()
         {
-            return _context.Company.ToList(); 
+            return _context.Company.ToList();
         }
     }
 }

@@ -1,3 +1,5 @@
+using MedicalEquipmentMarket.Data;
+using MedicalEquipmentMarket.Model;
 using MedicalEquipmentMarket.Security;
 using MedicalEquipmentMarket.Services;
 using Microsoft.AspNetCore.Identity;
@@ -8,6 +10,10 @@ using System.Configuration;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetSection("ConnectionStrings:WebApiDatabase").Value);
+});
 builder.Services.AddDbContext<SecurityDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetSection("ConnectionStrings:WebApiDatabase").Value);
@@ -21,6 +27,8 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
     options.Password.RequireLowercase=false;
 }).AddEntityFrameworkStores<SecurityDbContext>().AddDefaultTokenProviders(); 
 builder.Services.AddTransient<IAuthService, AuthService>();
+//
+builder.Services.AddScoped<ICompanyService,CompanyService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
