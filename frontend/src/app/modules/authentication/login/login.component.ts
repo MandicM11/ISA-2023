@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Credentials } from '../model/credentials.model';
 import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
+import { OutletContext, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -24,13 +25,13 @@ export class LoginComponent {
   ngOnInit(): void {
   }
 
-/*  login(): void {
+   login(): void {
     this.authService.login(this.credentials).subscribe(res => {
-      this.router.navigate(['/']);
+     this.router.navigate(['/companies']);
+     console.log("uspesno");
     },
-    error => this.snackBar.open("Wrong username and/or password!", "Ok", {
-      duration: 2000,
-      panelClass: ['snack-bar']
-    }));
-  } */
+    error => {
+      this.router.navigate(['/login']);
+    });
+  }
 }
