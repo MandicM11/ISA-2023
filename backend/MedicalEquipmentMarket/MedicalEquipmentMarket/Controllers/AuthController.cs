@@ -2,6 +2,8 @@
 using MedicalEquipmentMarket.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Common;
+using NuGet.Protocol.Plugins;
 
 namespace MedicalEquipmentMarket.Controllers
 {
@@ -14,12 +16,20 @@ namespace MedicalEquipmentMarket.Controllers
         public AuthController(IAuthService authService) {
             _authService = authService;
         }
-        [HttpGet]
-        public async Task Login(LoginRequest request)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(LoginRequest request)
         {
-
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            if(await _authService.Login(request))
+            {
+                 return Ok(52);
+            }
+            return BadRequest();
         }
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<Boolean> RegisterUser(LoginRequest request)
         {
             return await _authService.RegisterUser(request);

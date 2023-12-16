@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
+import { AuthService } from '../modules/authentication/services/auth.service';
 
 
 @Component({
@@ -11,8 +12,21 @@ import { Router, RouterOutlet } from '@angular/router';
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+  isExpanded: boolean = false;
+  isLogged: boolean = false;
   constructor(
-    private router: Router) {}
+    private router: Router,
+    private authService: AuthService) {}
+
+    ngOnInit(): void {
+      this.authService.loginObserver.subscribe((val) => {
+        this.isLogged = val;
+      });
+    }
+    logout(): void {
+      this.authService.logout();
+      this.router.navigate(['/login']);
+    }
   register(): void {
     this.router.navigate(['/register']);
   }

@@ -11,10 +11,10 @@
         <li class="nav-item">
           <a class="nav-link" href="companies">Kompanije</a>
         </li>
-        <li class="nav-item">
+        <li *ngIf="isLogged" class="nav-item">
           <a class="nav-link" href="#">Pricing</a>
         </li>
-        <li class="nav-item dropdown">
+        <li *ngIf="isLogged" class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Dropdown link
           </a>
@@ -28,10 +28,13 @@
     </div>
     <div class="bottom-menu-items">
       <a style="margin-right: 20px;" mat-list-item class="libre">
-        <button type="button" class="btn btn-secondary"><a class="nav-link" href="login">Login</a></button>
+        <button *ngIf="!isLogged" type="button" class="btn btn-secondary"><a class="nav-link" href="login">Login</a></button>
       </a>
       <a style="margin-right: 20px;"  mat-list-item class="libre">
-        <button type="button" class="btn btn-secondary"><a class="nav-link" href="register">Register</a></button>
+        <button *ngIf="!isLogged" type="button" class="btn btn-secondary"><a class="nav-link" href="register" >Register</a></button>
+      </a>
+      <a style="margin-right: 20px;"  mat-list-item class="libre">
+        <button *ngIf="isLogged" type="button" class="btn btn-secondary"><a class="nav-link" (click)="logout()" >Logout</a></button>
       </a>
     </div>
 </nav>
