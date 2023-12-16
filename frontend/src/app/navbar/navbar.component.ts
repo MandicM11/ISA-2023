@@ -15,4 +15,7 @@ export class NavbarComponent {
   register(): void {
     this.router.navigate(['/register']);
   }
+  companies(): void {
+    this.router.navigate(['/companies']);
+  }
 }
