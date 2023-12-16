@@ -111,17 +111,17 @@ namespace MedicalEquipmentMarket.Migrations
             migrationBuilder.InsertData(
                 table: "PickupSchedule",
                 columns: new[] { "IdS", "CompanId", "EquipId", "ScheduleTime", "Status" },
-                values: new object[] { 1, 1, 1, new DateTime(2023, 11, 24, 15, 40, 47, 186, DateTimeKind.Utc).AddTicks(9981), "zakazan" });
+                values: new object[] { 1, 1, 1, new DateTime(2023, 12, 16, 12, 41, 7, 447, DateTimeKind.Utc).AddTicks(9720), "zakazan" });
 
             migrationBuilder.InsertData(
                 table: "Reservation",
                 columns: new[] { "ReservationId", "BuyerAccountId", "CompId", "EquipmId", "ReservationTime" },
-                values: new object[] { 1, 1, 2, 2, new DateTime(2023, 11, 24, 15, 40, 47, 186, DateTimeKind.Utc).AddTicks(9956) });
+                values: new object[] { 1, 1, 2, 2, new DateTime(2023, 12, 16, 12, 41, 7, 447, DateTimeKind.Utc).AddTicks(9697) });
 
             migrationBuilder.InsertData(
                 table: "SalesReport",
                 columns: new[] { "IdSales", "CompanId", "EquipId", "ReportDate" },
-                values: new object[] { 1, 1, 0, new DateTime(2023, 11, 24, 15, 40, 47, 186, DateTimeKind.Utc).AddTicks(9931) });
+                values: new object[] { 1, 1, 0, new DateTime(2023, 12, 16, 12, 41, 7, 447, DateTimeKind.Utc).AddTicks(9671) });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

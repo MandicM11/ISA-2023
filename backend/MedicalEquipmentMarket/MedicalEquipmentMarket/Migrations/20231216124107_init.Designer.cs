@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MedicalEquipmentMarket.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231124154047_init")]
+    [Migration("20231216124107_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -157,7 +157,7 @@ namespace MedicalEquipmentMarket.Migrations
                             IdS = 1,
                             CompanId = 1,
                             EquipId = 1,
-                            ScheduleTime = new DateTime(2023, 11, 24, 15, 40, 47, 186, DateTimeKind.Utc).AddTicks(9981),
+                            ScheduleTime = new DateTime(2023, 12, 16, 12, 41, 7, 447, DateTimeKind.Utc).AddTicks(9720),
                             Status = "zakazan"
                         });
                 });
@@ -193,7 +193,7 @@ namespace MedicalEquipmentMarket.Migrations
                             BuyerAccountId = 1,
                             CompId = 2,
                             EquipmId = 2,
-                            ReservationTime = new DateTime(2023, 11, 24, 15, 40, 47, 186, DateTimeKind.Utc).AddTicks(9956)
+                            ReservationTime = new DateTime(2023, 12, 16, 12, 41, 7, 447, DateTimeKind.Utc).AddTicks(9697)
                         });
                 });
 
@@ -224,7 +224,7 @@ namespace MedicalEquipmentMarket.Migrations
                             IdSales = 1,
                             CompanId = 1,
                             EquipId = 0,
-                            ReportDate = new DateTime(2023, 11, 24, 15, 40, 47, 186, DateTimeKind.Utc).AddTicks(9931)
+                            ReportDate = new DateTime(2023, 12, 16, 12, 41, 7, 447, DateTimeKind.Utc).AddTicks(9671)
                         });
                 });
 #pragma warning restore 612, 618
