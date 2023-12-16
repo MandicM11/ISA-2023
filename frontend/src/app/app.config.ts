@@ -5,5 +5,9 @@ import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { JwtModule } from '@auth0/angular-jwt';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes),importProvidersFrom(HttpClientModule),importProvidersFrom(JwtModule)]
+  providers: [provideRouter(routes),importProvidersFrom(HttpClientModule),importProvidersFrom(JwtModule.forRoot({
+    config: {
+      tokenGetter: () => localStorage.getItem('token')
+    }
+  }))]
 };

@@ -10,7 +10,7 @@ import { Credentials } from '../model/credentials.model';
 })
 export class AuthService {
 
-  private apiUrl = 'https://localhost:7121/';
+  private apiUrl = 'https://localhost:7121';
   userClaims: any = null;
   private loginSource = new BehaviorSubject<boolean>(false);
   public loginObserver = this.loginSource.asObservable();
