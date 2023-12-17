@@ -24,15 +24,19 @@ namespace MedicalEquipmentMarket.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Company>>> GetCompaniesWithEquipment()
         {
-            var companiesWithEquipment = await _context.Company
-                .Select(c => new
-                {
-                    Company = c,
-                    Equipments = c.CompanyEquipments.Select(ce => ce.Equipment).ToList()
-                })
-                .ToListAsync();
+            var companiesWithReservationsAndEquipment = await _context.Company
+         .Include(c => c.Reservations) // Include reservations for each Company
+         .Select(c => new
+         {
+             Company = c,
+             Reservations = c.Reservations.ToList(), // Fetch Reservations
+             Equipments = c.CompanyEquipments.Select(ce => ce.Equipment).ToList() // Fetch Equipments
+         })
+         .ToListAsync();
 
-            return Ok(companiesWithEquipment);
+            return Ok(companiesWithReservationsAndEquipment);
         }
+       
+      
     }
 }

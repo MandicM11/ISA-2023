@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Migrations\AppDb\" />
     <Folder Include="Migrations\SecurityDb\" />
   </ItemGroup>
 

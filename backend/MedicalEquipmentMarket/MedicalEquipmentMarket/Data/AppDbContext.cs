@@ -31,18 +31,23 @@ namespace MedicalEquipmentMarket.Data
                 .HasOne(ce => ce.Equipment)
                 .WithMany(e => e.CompanyEquipments)
                 .HasForeignKey(ce => ce.EquipmentId);
+            modelBuilder.Entity<Company>()
+                .HasMany(c => c.Reservations)
+                .WithOne(r => r.Company)
+                .HasForeignKey(r => r.CompanyId);
+
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<PickupSchedule>().HasKey(p => p.IdS);
             modelBuilder.Entity<SalesReport>().HasKey(s => s.IdSales);
             modelBuilder.SeedEquipment();
-            modelBuilder.SeedCompany();
             modelBuilder.SeedSalesReport();
             modelBuilder.SeedReservation();
             modelBuilder.SeedPickupSchedule();
             modelBuilder.SeedCompanyEquipment();
+            modelBuilder.SeedCompany();
 
-           
+
 
         }
         public DbSet<Equipment> Equipment { get; set; }
@@ -50,7 +55,7 @@ namespace MedicalEquipmentMarket.Data
 
         public DbSet<CompanyEquipment> CompanyEquipments { get; set; }
 
-        public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<Reservation> Reservations{ get; set; }
         public DbSet<PickupSchedule> PickupSchedule { get; set; }
     }
 }

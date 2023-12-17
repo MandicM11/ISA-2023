@@ -10,6 +10,8 @@
 
         public ICollection<CompanyEquipment> CompanyEquipments { get; set; }
 
+        public ICollection<Reservation> Reservations { get; set; }
+
         public Company()
         {
 
@@ -21,6 +23,7 @@
             Address = address;
             City = city;
             PhoneNumber = phoneNumber;
+
         }
     }
 }

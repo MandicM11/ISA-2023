@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MedicalEquipmentMarket.Migrations
+namespace MedicalEquipmentMarket.Migrations.AppDb
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -174,12 +174,6 @@ namespace MedicalEquipmentMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdS"));
 
-                    b.Property<int>("CompanId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("EquipId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("ScheduleTime")
                         .HasColumnType("timestamp with time zone");
 
@@ -195,9 +189,7 @@ namespace MedicalEquipmentMarket.Migrations
                         new
                         {
                             IdS = 1,
-                            CompanId = 1,
-                            EquipId = 1,
-                            ScheduleTime = new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9747),
+                            ScheduleTime = new DateTime(2023, 12, 17, 22, 15, 9, 483, DateTimeKind.Utc).AddTicks(6321),
                             Status = "zakazan"
                         });
                 });
@@ -213,10 +205,7 @@ namespace MedicalEquipmentMarket.Migrations
                     b.Property<int>("BuyerAccountId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CompId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("EquipmId")
+                    b.Property<int>("CompanyId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("ReservationTime")
@@ -224,16 +213,31 @@ namespace MedicalEquipmentMarket.Migrations
 
                     b.HasKey("ReservationId");
 
-                    b.ToTable("Reservation");
+                    b.HasIndex("CompanyId");
+
+                    b.ToTable("Reservations");
 
                     b.HasData(
                         new
                         {
                             ReservationId = 1,
+                            BuyerAccountId = 2,
+                            CompanyId = 1,
+                            ReservationTime = new DateTime(2023, 12, 17, 22, 15, 9, 483, DateTimeKind.Utc).AddTicks(6291)
+                        },
+                        new
+                        {
+                            ReservationId = 2,
                             BuyerAccountId = 1,
-                            CompId = 2,
-                            EquipmId = 2,
-                            ReservationTime = new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9728)
+                            CompanyId = 1,
+                            ReservationTime = new DateTime(2023, 12, 17, 22, 15, 9, 483, DateTimeKind.Utc).AddTicks(6293)
+                        },
+                        new
+                        {
+                            ReservationId = 3,
+                            BuyerAccountId = 3,
+                            CompanyId = 2,
+                            ReservationTime = new DateTime(2023, 12, 17, 22, 15, 9, 483, DateTimeKind.Utc).AddTicks(6294)
                         });
                 });
 
@@ -264,7 +268,7 @@ namespace MedicalEquipmentMarket.Migrations
                             IdSales = 1,
                             CompanId = 1,
                             EquipId = 0,
-                            ReportDate = new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9707)
+                            ReportDate = new DateTime(2023, 12, 17, 22, 15, 9, 483, DateTimeKind.Utc).AddTicks(6245)
                         });
                 });
 
@@ -287,9 +291,22 @@ namespace MedicalEquipmentMarket.Migrations
                     b.Navigation("Equipment");
                 });
 
+            modelBuilder.Entity("MedicalEquipmentMarket.Model.Reservation", b =>
+                {
+                    b.HasOne("MedicalEquipmentMarket.Model.Company", "Company")
+                        .WithMany("Reservations")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+                });
+
             modelBuilder.Entity("MedicalEquipmentMarket.Model.Company", b =>
                 {
                     b.Navigation("CompanyEquipments");
+
+                    b.Navigation("Reservations");
                 });
 
             modelBuilder.Entity("MedicalEquipmentMarket.Model.Equipment", b =>

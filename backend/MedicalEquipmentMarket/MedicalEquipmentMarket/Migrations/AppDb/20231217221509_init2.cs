@@ -4,9 +4,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MedicalEquipmentMarket.Migrations
+namespace MedicalEquipmentMarket.Migrations.AppDb
 {
-    public partial class init : Migration
+    public partial class init2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,30 +47,12 @@ namespace MedicalEquipmentMarket.Migrations
                 {
                     IdS = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CompanId = table.Column<int>(type: "integer", nullable: false),
-                    EquipId = table.Column<int>(type: "integer", nullable: false),
                     ScheduleTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PickupSchedule", x => x.IdS);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Reservation",
-                columns: table => new
-                {
-                    ReservationId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    BuyerAccountId = table.Column<int>(type: "integer", nullable: false),
-                    CompId = table.Column<int>(type: "integer", nullable: false),
-                    EquipmId = table.Column<int>(type: "integer", nullable: false),
-                    ReservationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reservation", x => x.ReservationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,6 +68,27 @@ namespace MedicalEquipmentMarket.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_SalesReport", x => x.IdSales);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reservations",
+                columns: table => new
+                {
+                    ReservationId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    BuyerAccountId = table.Column<int>(type: "integer", nullable: false),
+                    ReservationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CompanyId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reservations", x => x.ReservationId);
+                    table.ForeignKey(
+                        name: "FK_Reservations_Company_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Company",
+                        principalColumn: "CompanyId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,18 +137,13 @@ namespace MedicalEquipmentMarket.Migrations
 
             migrationBuilder.InsertData(
                 table: "PickupSchedule",
-                columns: new[] { "IdS", "CompanId", "EquipId", "ScheduleTime", "Status" },
-                values: new object[] { 1, 1, 1, new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9747), "zakazan" });
-
-            migrationBuilder.InsertData(
-                table: "Reservation",
-                columns: new[] { "ReservationId", "BuyerAccountId", "CompId", "EquipmId", "ReservationTime" },
-                values: new object[] { 1, 1, 2, 2, new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9728) });
+                columns: new[] { "IdS", "ScheduleTime", "Status" },
+                values: new object[] { 1, new DateTime(2023, 12, 17, 22, 15, 9, 483, DateTimeKind.Utc).AddTicks(6321), "zakazan" });
 
             migrationBuilder.InsertData(
                 table: "SalesReport",
                 columns: new[] { "IdSales", "CompanId", "EquipId", "ReportDate" },
-                values: new object[] { 1, 1, 0, new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9707) });
+                values: new object[] { 1, 1, 0, new DateTime(2023, 12, 17, 22, 15, 9, 483, DateTimeKind.Utc).AddTicks(6245) });
 
             migrationBuilder.InsertData(
                 table: "CompanyEquipments",
@@ -159,10 +157,25 @@ namespace MedicalEquipmentMarket.Migrations
                     { 3, 3 }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Reservations",
+                columns: new[] { "ReservationId", "BuyerAccountId", "CompanyId", "ReservationTime" },
+                values: new object[,]
+                {
+                    { 1, 2, 1, new DateTime(2023, 12, 17, 22, 15, 9, 483, DateTimeKind.Utc).AddTicks(6291) },
+                    { 2, 1, 1, new DateTime(2023, 12, 17, 22, 15, 9, 483, DateTimeKind.Utc).AddTicks(6293) },
+                    { 3, 3, 2, new DateTime(2023, 12, 17, 22, 15, 9, 483, DateTimeKind.Utc).AddTicks(6294) }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CompanyEquipments_EquipmentId",
                 table: "CompanyEquipments",
                 column: "EquipmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reservations_CompanyId",
+                table: "Reservations",
+                column: "CompanyId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -174,16 +187,16 @@ namespace MedicalEquipmentMarket.Migrations
                 name: "PickupSchedule");
 
             migrationBuilder.DropTable(
-                name: "Reservation");
+                name: "Reservations");
 
             migrationBuilder.DropTable(
                 name: "SalesReport");
 
             migrationBuilder.DropTable(
-                name: "Company");
+                name: "Equipment");
 
             migrationBuilder.DropTable(
-                name: "Equipment");
+                name: "Company");
         }
     }
 }

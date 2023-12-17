@@ -15,6 +15,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class CompanyListComponent implements OnInit {
   companiesWithEquipment: any[] = [];
+  selectedEquipments: number[] = []; // Array to hold selected equipment ids
+  showPanel = false;
 
   constructor(private companyService: CompanyService,private cdr: ChangeDetectorRef) { }
 
@@ -36,8 +38,22 @@ export class CompanyListComponent implements OnInit {
     );
   }
 
-  selectEquipment() {
-    console.log('radi');
+
+  onSelectButtonClick() {
+    // Perform any additional logic before showing the panel if needed
+    this.showPanel = true; // Set flag to show the panel
+  }
+
+   // Function to handle checkbox selection
+   onCheckboxChange(event: any, equipmentId: number) {
+    if (event.target.checked) {
+      this.selectedEquipments.push(equipmentId); // Add to selectedEquipments array
+    } else {
+      const index = this.selectedEquipments.indexOf(equipmentId);
+      if (index !== -1) {
+        this.selectedEquipments.splice(index, 1); // Remove from selectedEquipments array
+      }
+    }
   }
 }
 

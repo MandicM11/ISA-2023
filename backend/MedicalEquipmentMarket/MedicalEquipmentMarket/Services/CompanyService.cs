@@ -18,13 +18,23 @@ namespace MedicalEquipmentMarket.Services
 
         public List<Company> GetCompaniesWithEquipment()
         {
+            var companiesWithEquipmentAndReservations = _context.Company
+        .Include(c => c.CompanyEquipments)
+            .ThenInclude(ce => ce.Equipment) // Include associated equipment
+        .Include(c => c.Reservations) // Include associated reservations
+        .ToList();
+
+            return companiesWithEquipmentAndReservations;
+        }
+
+        public List<Company> GetcompaniesWithReservations()
+        {
             // Retrieve companies with associated equipment using Include and ThenInclude
-            var companiesWithEquipment = _context.Company
-                .Include(c => c.CompanyEquipments)
-                .ThenInclude(ce => ce.Equipment)
+            var companiesWithRes = _context.Company
+                .Include(c => c.Reservations)
                 .ToList();
 
-            return companiesWithEquipment;
+            return companiesWithRes;
         }
     }
 }
