@@ -10,6 +10,9 @@
         
         public double Price { get; set; }
 
+        public ICollection<CompanyEquipment> CompanyEquipments { get; set; }
+
+
         public Equipment() { 
         
         }
@@ -19,6 +22,7 @@
             this.Name= name;
             this.Description= description;
             this.Price= price;
+            
         }
     }
 }

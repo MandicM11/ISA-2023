@@ -4,6 +4,6 @@ namespace MedicalEquipmentMarket.Services
 {
     public interface ICompanyService
     {
-        public List<Company> GetAllCompanies();
+        public List<Company> GetCompaniesWithEquipment();
     }
 }

@@ -88,6 +88,30 @@ namespace MedicalEquipmentMarket.Migrations
                     table.PrimaryKey("PK_SalesReport", x => x.IdSales);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CompanyEquipments",
+                columns: table => new
+                {
+                    CompanyId = table.Column<int>(type: "integer", nullable: false),
+                    EquipmentId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CompanyEquipments", x => new { x.CompanyId, x.EquipmentId });
+                    table.ForeignKey(
+                        name: "FK_CompanyEquipments_Company_CompanyId",
+                        column: x => x.CompanyId,
+                        principalTable: "Company",
+                        principalColumn: "CompanyId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CompanyEquipments_Equipment_EquipmentId",
+                        column: x => x.EquipmentId,
+                        principalTable: "Equipment",
+                        principalColumn: "EquipmentId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "Company",
                 columns: new[] { "CompanyId", "Address", "City", "Name", "PhoneNumber" },
@@ -111,26 +135,40 @@ namespace MedicalEquipmentMarket.Migrations
             migrationBuilder.InsertData(
                 table: "PickupSchedule",
                 columns: new[] { "IdS", "CompanId", "EquipId", "ScheduleTime", "Status" },
-                values: new object[] { 1, 1, 1, new DateTime(2023, 12, 16, 12, 41, 7, 447, DateTimeKind.Utc).AddTicks(9720), "zakazan" });
+                values: new object[] { 1, 1, 1, new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9747), "zakazan" });
 
             migrationBuilder.InsertData(
                 table: "Reservation",
                 columns: new[] { "ReservationId", "BuyerAccountId", "CompId", "EquipmId", "ReservationTime" },
-                values: new object[] { 1, 1, 2, 2, new DateTime(2023, 12, 16, 12, 41, 7, 447, DateTimeKind.Utc).AddTicks(9697) });
+                values: new object[] { 1, 1, 2, 2, new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9728) });
 
             migrationBuilder.InsertData(
                 table: "SalesReport",
                 columns: new[] { "IdSales", "CompanId", "EquipId", "ReportDate" },
-                values: new object[] { 1, 1, 0, new DateTime(2023, 12, 16, 12, 41, 7, 447, DateTimeKind.Utc).AddTicks(9671) });
+                values: new object[] { 1, 1, 0, new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9707) });
+
+            migrationBuilder.InsertData(
+                table: "CompanyEquipments",
+                columns: new[] { "CompanyId", "EquipmentId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 1, 2 },
+                    { 1, 3 },
+                    { 2, 1 },
+                    { 3, 3 }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CompanyEquipments_EquipmentId",
+                table: "CompanyEquipments",
+                column: "EquipmentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Company");
-
-            migrationBuilder.DropTable(
-                name: "Equipment");
+                name: "CompanyEquipments");
 
             migrationBuilder.DropTable(
                 name: "PickupSchedule");
@@ -140,6 +178,12 @@ namespace MedicalEquipmentMarket.Migrations
 
             migrationBuilder.DropTable(
                 name: "SalesReport");
+
+            migrationBuilder.DropTable(
+                name: "Company");
+
+            migrationBuilder.DropTable(
+                name: "Equipment");
         }
     }
 }

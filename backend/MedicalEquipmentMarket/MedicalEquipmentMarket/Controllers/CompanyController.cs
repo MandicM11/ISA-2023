@@ -1,24 +1,38 @@
+using MedicalEquipmentMarket.Data;
+using MedicalEquipmentMarket.Model;
 using Microsoft.AspNetCore.Mvc;
-using MedicalEquipmentMarket.Services;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
 
 namespace MedicalEquipmentMarket.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class CompanyController : ControllerBase
+    [ApiController]
+    public class CompaniesController : ControllerBase
     {
-        private readonly ICompanyService _companyService;
+        private readonly AppDbContext _context;
 
-        public CompanyController(ICompanyService companyService)
+        public CompaniesController(AppDbContext context)
         {
-            _companyService = companyService;
+            _context = context;
         }
 
+        // GET: api/companies
         [HttpGet]
-        public IActionResult GetAllCompanies()
+        public async Task<ActionResult<IEnumerable<Company>>> GetCompaniesWithEquipment()
         {
-            var companies = _companyService.GetAllCompanies();
-            return Ok(companies); 
+            var companiesWithEquipment = await _context.Company
+                .Select(c => new
+                {
+                    Company = c,
+                    Equipments = c.CompanyEquipments.Select(ce => ce.Equipment).ToList()
+                })
+                .ToListAsync();
+
+            return Ok(companiesWithEquipment);
         }
     }
 }
