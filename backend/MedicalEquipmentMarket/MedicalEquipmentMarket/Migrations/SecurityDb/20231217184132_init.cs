@@ -4,9 +4,9 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MedicalEquipmentMarket.Migrations
+namespace MedicalEquipmentMarket.Migrations.SecurityDb
 {
-    public partial class init1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,7 +61,7 @@ namespace MedicalEquipmentMarket.Migrations
                     PhoneNumber = table.Column<string>(type: "text", nullable: false),
                     Occupation = table.Column<string>(type: "text", nullable: false),
                     CompanyInfo = table.Column<string>(type: "text", nullable: false),
-                    AddressId = table.Column<string>(type: "text", nullable: false)
+                    AddressId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

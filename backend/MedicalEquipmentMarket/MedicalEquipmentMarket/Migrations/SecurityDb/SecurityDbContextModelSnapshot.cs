@@ -8,7 +8,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MedicalEquipmentMarket.Migrations
+namespace MedicalEquipmentMarket.Migrations.SecurityDb
 {
     [DbContext(typeof(SecurityDbContext))]
     partial class SecurityDbContextModelSnapshot : ModelSnapshot
@@ -30,9 +30,8 @@ namespace MedicalEquipmentMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AddressId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("CompanyInfo")
                         .IsRequired()

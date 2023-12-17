@@ -4,6 +4,7 @@ import { CompanyService } from '../../services/company.service';
 import { OnInit } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../authentication/services/auth.service';
 
 
 @Component({
@@ -15,12 +16,19 @@ import { FormsModule } from '@angular/forms';
 })
 export class CompanyListComponent implements OnInit {
   companiesWithEquipment: any[] = [];
+<<<<<<< HEAD
   selectedEquipments: number[] = []; // Array to hold selected equipment ids
   showPanel = false;
 
   constructor(private companyService: CompanyService,private cdr: ChangeDetectorRef) { }
+=======
+  userId=0;
+  constructor(private companyService: CompanyService,private cdr: ChangeDetectorRef,private authService: AuthService) { }
+>>>>>>> d1f807947e6e8c8d79c69f7286c684f7f57d94d5
 
   ngOnInit(): void {
+    this.userId=this.authService.userId;
+    console.log(this.userId);
     this.loadCompanies();
   }
 
@@ -29,7 +37,7 @@ export class CompanyListComponent implements OnInit {
       (data: any[]) => {
         this.companiesWithEquipment = data;
         this.cdr.detectChanges();
-        
+
 
       },
       (error) => {

@@ -9,11 +9,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MedicalEquipmentMarket.Migrations
+namespace MedicalEquipmentMarket.Migrations.SecurityDb
 {
     [DbContext(typeof(SecurityDbContext))]
-    [Migration("20231217221448_init1")]
-    partial class init1
+    [Migration("20231217184132_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,9 +32,8 @@ namespace MedicalEquipmentMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("AddressId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("CompanyInfo")
                         .IsRequired()
