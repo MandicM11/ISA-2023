@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet } from '@angular/router';
 import { AuthService } from '../modules/authentication/services/auth.service';
-
+import { Observable, shareReplay } from 'rxjs';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +16,7 @@ export class NavbarComponent {
   isExpanded: boolean = false;
   isLogged: boolean = false;
   constructor(
+    private breakpointObserver: BreakpointObserver,
     private router: Router,
     private authService: AuthService) {}
 
@@ -23,6 +25,7 @@ export class NavbarComponent {
         this.isLogged = val;
       });
     }
+
     logout(): void {
       this.authService.logout();
       this.router.navigate(['/login']);
