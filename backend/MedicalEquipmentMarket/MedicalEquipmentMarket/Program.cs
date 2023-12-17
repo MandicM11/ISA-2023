@@ -18,6 +18,7 @@ builder.Services.AddDbContext<SecurityDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetSection("ConnectionStrings:WebApiDatabase").Value);
 });
+
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 {
     options.Password.RequireNonAlphanumeric = false;
@@ -29,6 +30,7 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options =>
 builder.Services.AddTransient<IAuthService, AuthService>();
 //
 builder.Services.AddScoped<ICompanyService,CompanyService>();
+builder.Services.AddScoped<IReservationService,ReseravionService>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

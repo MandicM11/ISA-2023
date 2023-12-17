@@ -22,6 +22,48 @@ namespace MedicalEquipmentMarket.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("CompanyEquipment", b =>
+                {
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EquipmentId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("CompanyId", "EquipmentId");
+
+                    b.HasIndex("EquipmentId");
+
+                    b.ToTable("CompanyEquipments");
+
+                    b.HasData(
+                        new
+                        {
+                            CompanyId = 1,
+                            EquipmentId = 2
+                        },
+                        new
+                        {
+                            CompanyId = 1,
+                            EquipmentId = 3
+                        },
+                        new
+                        {
+                            CompanyId = 1,
+                            EquipmentId = 1
+                        },
+                        new
+                        {
+                            CompanyId = 2,
+                            EquipmentId = 1
+                        },
+                        new
+                        {
+                            CompanyId = 3,
+                            EquipmentId = 3
+                        });
+                });
+
             modelBuilder.Entity("MedicalEquipmentMarket.Model.Company", b =>
                 {
                     b.Property<int>("CompanyId")
@@ -155,7 +197,7 @@ namespace MedicalEquipmentMarket.Migrations
                             IdS = 1,
                             CompanId = 1,
                             EquipId = 1,
-                            ScheduleTime = new DateTime(2023, 12, 16, 12, 41, 7, 447, DateTimeKind.Utc).AddTicks(9720),
+                            ScheduleTime = new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9747),
                             Status = "zakazan"
                         });
                 });
@@ -191,7 +233,7 @@ namespace MedicalEquipmentMarket.Migrations
                             BuyerAccountId = 1,
                             CompId = 2,
                             EquipmId = 2,
-                            ReservationTime = new DateTime(2023, 12, 16, 12, 41, 7, 447, DateTimeKind.Utc).AddTicks(9697)
+                            ReservationTime = new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9728)
                         });
                 });
 
@@ -222,8 +264,37 @@ namespace MedicalEquipmentMarket.Migrations
                             IdSales = 1,
                             CompanId = 1,
                             EquipId = 0,
-                            ReportDate = new DateTime(2023, 12, 16, 12, 41, 7, 447, DateTimeKind.Utc).AddTicks(9671)
+                            ReportDate = new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9707)
                         });
+                });
+
+            modelBuilder.Entity("CompanyEquipment", b =>
+                {
+                    b.HasOne("MedicalEquipmentMarket.Model.Company", "Company")
+                        .WithMany("CompanyEquipments")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MedicalEquipmentMarket.Model.Equipment", "Equipment")
+                        .WithMany("CompanyEquipments")
+                        .HasForeignKey("EquipmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("Equipment");
+                });
+
+            modelBuilder.Entity("MedicalEquipmentMarket.Model.Company", b =>
+                {
+                    b.Navigation("CompanyEquipments");
+                });
+
+            modelBuilder.Entity("MedicalEquipmentMarket.Model.Equipment", b =>
+                {
+                    b.Navigation("CompanyEquipments");
                 });
 #pragma warning restore 612, 618
         }

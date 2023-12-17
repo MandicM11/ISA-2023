@@ -9,7 +9,7 @@ namespace MedicalEquipmentMarket.Data.DataSeed
         {
             modelBuilder.Entity<PickupSchedule>(f =>
             {
-                f.HasData(new PickupSchedule(1, 1, 1, DateTime.UtcNow, "zakazan")
+                f.HasData(new PickupSchedule(1, DateTime.UtcNow, "zakazan")
                     );
             });
         }

@@ -11,8 +11,8 @@ export class CompanyService {
 
   constructor(private http: HttpClient) {};
 
-  getAllCompanies(): Observable<any[]> {
+  getCompaniesWithEquipment(): Observable<any[]> {
   
-    return this.http.get<any[]>(this.apiUrl + '/api/Company');
+    return this.http.get<any[]>(this.apiUrl + '/api/Companies');
   }
 }

@@ -8,6 +8,8 @@
         public string City { get; set; }
         public string PhoneNumber { get; set; }
 
+        public ICollection<CompanyEquipment> CompanyEquipments { get; set; }
+
         public Company()
         {
 

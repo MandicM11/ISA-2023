@@ -19,6 +19,20 @@ namespace MedicalEquipmentMarket.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<CompanyEquipment>()
+       .HasKey(ce => new { ce.CompanyId, ce.EquipmentId });
+
+            modelBuilder.Entity<CompanyEquipment>()
+                .HasOne(ce => ce.Company)
+                .WithMany(c => c.CompanyEquipments)
+                .HasForeignKey(ce => ce.CompanyId);
+
+            modelBuilder.Entity<CompanyEquipment>()
+                .HasOne(ce => ce.Equipment)
+                .WithMany(e => e.CompanyEquipments)
+                .HasForeignKey(ce => ce.EquipmentId);
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<PickupSchedule>().HasKey(p => p.IdS);
             modelBuilder.Entity<SalesReport>().HasKey(s => s.IdSales);
             modelBuilder.SeedEquipment();
@@ -26,12 +40,17 @@ namespace MedicalEquipmentMarket.Data
             modelBuilder.SeedSalesReport();
             modelBuilder.SeedReservation();
             modelBuilder.SeedPickupSchedule();
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.SeedCompanyEquipment();
+
+           
 
         }
         public DbSet<Equipment> Equipment { get; set; }
         public DbSet<Company> Company{ get; set; }
-        public DbSet<Reservation> Reservation { get; set; }
+
+        public DbSet<CompanyEquipment> CompanyEquipments { get; set; }
+
+        public DbSet<Reservation> Reservations { get; set; }
         public DbSet<PickupSchedule> PickupSchedule { get; set; }
     }
 }
