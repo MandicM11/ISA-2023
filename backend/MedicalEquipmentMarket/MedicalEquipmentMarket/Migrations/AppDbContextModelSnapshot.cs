@@ -174,12 +174,6 @@ namespace MedicalEquipmentMarket.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("IdS"));
 
-                    b.Property<int>("CompanId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("EquipId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("ScheduleTime")
                         .HasColumnType("timestamp with time zone");
 
@@ -195,9 +189,7 @@ namespace MedicalEquipmentMarket.Migrations
                         new
                         {
                             IdS = 1,
-                            CompanId = 1,
-                            EquipId = 1,
-                            ScheduleTime = new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9747),
+                            ScheduleTime = new DateTime(2023, 12, 17, 18, 41, 16, 123, DateTimeKind.Utc).AddTicks(3743),
                             Status = "zakazan"
                         });
                 });
@@ -213,27 +205,19 @@ namespace MedicalEquipmentMarket.Migrations
                     b.Property<int>("BuyerAccountId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("CompId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("EquipmId")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime>("ReservationTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("ReservationId");
 
-                    b.ToTable("Reservation");
+                    b.ToTable("Reservations");
 
                     b.HasData(
                         new
                         {
                             ReservationId = 1,
-                            BuyerAccountId = 1,
-                            CompId = 2,
-                            EquipmId = 2,
-                            ReservationTime = new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9728)
+                            BuyerAccountId = 2,
+                            ReservationTime = new DateTime(2023, 12, 17, 18, 41, 16, 123, DateTimeKind.Utc).AddTicks(3715)
                         });
                 });
 
@@ -264,7 +248,7 @@ namespace MedicalEquipmentMarket.Migrations
                             IdSales = 1,
                             CompanId = 1,
                             EquipId = 0,
-                            ReportDate = new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9707)
+                            ReportDate = new DateTime(2023, 12, 17, 18, 41, 16, 123, DateTimeKind.Utc).AddTicks(3684)
                         });
                 });
 

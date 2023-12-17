@@ -10,9 +10,9 @@
         public string Occupation { get; set; }
         public string CompanyInfo { get; set; }
 
-        public string AddressId { get; set; }
+        public int AddressId { get; set; }
 
-        public BaseUser(int id, string userName, string name, string lastNmae, string phoneNumber, string occupation, string companyInfo, string addressId)
+        public BaseUser(int id, string userName, string name, string lastNmae, string phoneNumber, string occupation, string companyInfo, int addressId)
         {
             Id = id;
             UserName = userName;

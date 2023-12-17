@@ -47,8 +47,6 @@ namespace MedicalEquipmentMarket.Migrations
                 {
                     IdS = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CompanId = table.Column<int>(type: "integer", nullable: false),
-                    EquipId = table.Column<int>(type: "integer", nullable: false),
                     ScheduleTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Status = table.Column<string>(type: "text", nullable: false)
                 },
@@ -58,19 +56,17 @@ namespace MedicalEquipmentMarket.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reservation",
+                name: "Reservations",
                 columns: table => new
                 {
                     ReservationId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     BuyerAccountId = table.Column<int>(type: "integer", nullable: false),
-                    CompId = table.Column<int>(type: "integer", nullable: false),
-                    EquipmId = table.Column<int>(type: "integer", nullable: false),
                     ReservationTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reservation", x => x.ReservationId);
+                    table.PrimaryKey("PK_Reservations", x => x.ReservationId);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,18 +130,18 @@ namespace MedicalEquipmentMarket.Migrations
 
             migrationBuilder.InsertData(
                 table: "PickupSchedule",
-                columns: new[] { "IdS", "CompanId", "EquipId", "ScheduleTime", "Status" },
-                values: new object[] { 1, 1, 1, new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9747), "zakazan" });
+                columns: new[] { "IdS", "ScheduleTime", "Status" },
+                values: new object[] { 1, new DateTime(2023, 12, 17, 18, 41, 16, 123, DateTimeKind.Utc).AddTicks(3743), "zakazan" });
 
             migrationBuilder.InsertData(
-                table: "Reservation",
-                columns: new[] { "ReservationId", "BuyerAccountId", "CompId", "EquipmId", "ReservationTime" },
-                values: new object[] { 1, 1, 2, 2, new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9728) });
+                table: "Reservations",
+                columns: new[] { "ReservationId", "BuyerAccountId", "ReservationTime" },
+                values: new object[] { 1, 2, new DateTime(2023, 12, 17, 18, 41, 16, 123, DateTimeKind.Utc).AddTicks(3715) });
 
             migrationBuilder.InsertData(
                 table: "SalesReport",
                 columns: new[] { "IdSales", "CompanId", "EquipId", "ReportDate" },
-                values: new object[] { 1, 1, 0, new DateTime(2023, 12, 17, 11, 41, 40, 55, DateTimeKind.Utc).AddTicks(9707) });
+                values: new object[] { 1, 1, 0, new DateTime(2023, 12, 17, 18, 41, 16, 123, DateTimeKind.Utc).AddTicks(3684) });
 
             migrationBuilder.InsertData(
                 table: "CompanyEquipments",
@@ -174,7 +170,7 @@ namespace MedicalEquipmentMarket.Migrations
                 name: "PickupSchedule");
 
             migrationBuilder.DropTable(
-                name: "Reservation");
+                name: "Reservations");
 
             migrationBuilder.DropTable(
                 name: "SalesReport");
