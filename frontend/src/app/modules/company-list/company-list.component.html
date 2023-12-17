@@ -1,12 +1,9 @@
-<div *ngIf="companies.length > 0">
-    <h1>List of Companies</h1>
-    <ul>
-      <li *ngFor="let company of companies">
-        {{ company.name }} 
-      </li>
-    </ul>
-  </div>
-  <div *ngIf="companies.length === 0">
-    <p>No companies available.</p>
-  </div>
-  
+<div *ngFor="let company of companiesWithEquipment">
+  <h3>Company Name: {{ company.company.name }}</h3>
+  <p>Equipment: </p>
+  <ul>
+    <li *ngFor="let equipment of company.equipments">
+      {{ equipment.name }}
+    </li>
+  </ul>
+</div>

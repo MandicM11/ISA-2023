@@ -1,7 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using MedicalEquipmentMarket.Model; 
-using MedicalEquipmentMarket.Data; 
+using MedicalEquipmentMarket.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace MedicalEquipmentMarket.Services
 {
@@ -14,9 +15,16 @@ namespace MedicalEquipmentMarket.Services
             _context = context;
         }
 
-        public List<Company> GetAllCompanies()
+
+        public List<Company> GetCompaniesWithEquipment()
         {
-            return _context.Company.ToList();
+            // Retrieve companies with associated equipment using Include and ThenInclude
+            var companiesWithEquipment = _context.Company
+                .Include(c => c.CompanyEquipments)
+                .ThenInclude(ce => ce.Equipment)
+                .ToList();
+
+            return companiesWithEquipment;
         }
     }
 }
