@@ -29,10 +29,21 @@ namespace MedicalEquipmentMarket.Controllers
             }
             return BadRequest();
         }
-        [HttpPost("register")]
+        [HttpPost("registere")]
         public async Task<Boolean> RegisterUser(LoginRequest request)
         {
             return await _authService.RegisterUser(request);
         }
+        [HttpPost("register")]
+        public async Task<Boolean> RegisterUser(RegisterRequest request)
+        {
+            LoginRequest req = new LoginRequest()
+            {
+                Username = request.Username,
+                Password = request.Password
+            };
+            return await _authService.RegisterUser(req);
+        }
+
     }
 }

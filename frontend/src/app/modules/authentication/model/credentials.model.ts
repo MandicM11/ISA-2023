@@ -1,7 +1,6 @@
 export class Credentials implements ICredentials {
   username: string = "";
   password: string = "";
-
   constructor() {
   }
 

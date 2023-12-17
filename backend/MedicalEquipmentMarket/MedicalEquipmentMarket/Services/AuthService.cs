@@ -22,7 +22,8 @@ namespace MedicalEquipmentMarket.Services
             var identityUser = new IdentityUser
             {
                 UserName = request.Username,
-                Email = request.Username
+                Email = request.Username,
+                
             };
             var result=await _userManager.CreateAsync(identityUser, request.Password);
             return result.Succeeded;

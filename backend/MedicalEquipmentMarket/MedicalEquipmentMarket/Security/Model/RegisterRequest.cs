@@ -5,15 +5,30 @@ namespace MedicalEquipmentMarket.Security.Model
 {
     public class RegisterRequest
     {
-        [Required]
-        public RegisterUserDTO RegisterUser { get; set; }
-        [Display(Name = "Email address")]
-        [Required(ErrorMessage = "The email address is required")]
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
-        public string Email { get; set; }
-        [Required]
         public string Username { get; set; }
-        [Required]
         public string Password { get; set; }
+        public string Email { get; set; }
+        public string Name { get; set; }
+        public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Occupation { get; set; }
+        public string CompanyInfo { get; set; }
+        public string Address { get; set; }
+        public RegisterRequest(string username, string password, string email, string name, string lastName, string phoneNumber, string occupation, string companyInfo, string address)
+        {
+            Username = username;
+            Password = password;
+            Email = email;
+            Name = name;
+            LastName = lastName;
+            PhoneNumber = phoneNumber;
+            Occupation = occupation;
+            CompanyInfo = companyInfo;
+            Address = address;
+        }
+        public RegisterRequest()
+        {
+
+        }
     }
 }

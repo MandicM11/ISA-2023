@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject, catchError, map, Observable, of } from 'rxjs';
 import { Credentials } from '../model/credentials.model';
+import { RegisterRequest } from '../model/register-request.model';
 
 @Injectable({
   providedIn: 'root'
@@ -33,9 +34,16 @@ export class AuthService {
         console.log(res);
         return true;
       })
-    );
-  }
-
+    );}
+    register(registerRequest: RegisterRequest): Observable<boolean> {
+      return this.http.post<any>(this.apiUrl + '/api/Auth/register', registerRequest, this.httpOptions).pipe(
+        map((res) => {
+        //  localStorage.setItem('token', res.jwt);
+         // this.userClaims = this.jwtHelper.decodeToken();
+          console.log(res);
+          return true;
+        })
+      );}
   logout(): void {
     localStorage.clear();
     this.loginSource.next(false);
